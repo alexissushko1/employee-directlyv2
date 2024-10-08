@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 //May need to check line 18
 
-app.use("/employees-router", require("./api/employees-router"));
+app.use("/employees", require("./api/employees-router"));
 
 app.use((req, res, next) => {
   next({ status: 404, message: "Endpoint not found."});
