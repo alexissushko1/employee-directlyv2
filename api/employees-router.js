@@ -13,6 +13,20 @@ router.get("/random", (req, res) => {
   res.json(employees[i]);
 });
 
+router.post("/", (req, res, next) => {
+  const { name } = req.body;
+  if (name) {
+    const addEmployee ={
+      id: employees.length + 1, name };
+      employees.push(addEmployee);
+      res.status(201).json({ addEmployee })
+    } else {
+      next({ status: 400, message: "Employee with this id doesn't exist."});
+    }
+  }
+)
+
+
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   const employee = employees.find((e) => e.id === +id);
@@ -22,3 +36,4 @@ router.get("/:id", (req, res) => {
     res.status(404).send(`There is no employee with id ${id}.`);
   }
 });
+
